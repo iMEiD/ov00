@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov00 - الصفحة الرئيسية</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      color: #004aad;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    a {
+      text-decoration: none;
+      color: #004aad;
+    }
+    .lang-toggle {
+      margin-top: 20px;
+    }
+    .social {
+      margin-top: 30px;
+    }
+    .social a {
+      margin: 0 10px;
+      text-decoration: none;
+      font-size: 18px;
+    }
+    .whatsapp-button {
+      display: inline-block;
+      margin-top: 20px;
+      background-color: #25D366;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="arabic">
+    <h1>مرحباً بك في ov00.com</h1>
+    <p>هذا الموقع قيد التطوير حالياً.<br>تابعنا قريباً للمزيد من التفاصيل والعروض.</p>
+    <p>للتواصل: <a href="mailto:info@ov00.com">info@ov00.com</a></p>
+    <a class="whatsapp-button" href="https://wa.me/966500000000" target="_blank">تواصل عبر واتساب</a>
+    <div class="social">
+      <a href="https://twitter.com" target="_blank">تويتر</a>
+      <a href="https://instagram.com" target="_blank">انستقرام</a>
+      <a href="https://t.me" target="_blank">تلجرام</a>
+    </div>
+    <div class="lang-toggle">
+      <a href="#english" onclick="document.getElementById('arabic').style.display='none';document.getElementById('english').style.display='block';">English</a>
+    </div>
+  </div>
+
+  <div class="container" id="english" style="display:none;">
+    <h1>Welcome to ov00.com</h1>
+    <p>This website is currently under development.<br>Stay tuned for more updates and offers.</p>
+    <p>Contact us: <a href="mailto:info@ov00.com">info@ov00.com</a></p>
+    <a class="whatsapp-button" href="https://wa.me/966500000000" target="_blank">Contact via WhatsApp</a>
+    <div class="social">
+      <a href="https://twitter.com" target="_blank">Twitter</a>
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+      <a href="https://t.me" target="_blank">Telegram</a>
+    </div>
+    <div class="lang-toggle">
+      <a href="#arabic" onclick="document.getElementById('english').style.display='none';document.getElementById('arabic').style.display='block';">العربية</a>
+    </div>
+  </div>
+</body>
+</html>
