@@ -68,6 +68,26 @@
     .light-mode #date {
       color: #555;
     }
+
+    .contact {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+
+    .light-mode .contact {
+      color: #444;
+    }
+
+    .contact a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -76,6 +96,10 @@
   <h1>مرحبًا بك في ov00.com</h1>
   <div id="clock">--:--:--</div>
   <div id="date">--/--/----</div>
+
+  <div class="contact">
+    📧 <a href="mailto:imeid@hotmail.com">imeid@hotmail.com</a>
+  </div>
 
   <script>
     function updateTime() {
