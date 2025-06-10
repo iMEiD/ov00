@@ -33,11 +33,11 @@
       margin: 0 10px;
       padding: 10px 20px;
       font-size: 1rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+      border:none;
+      border-radius:5px;
+      cursor:pointer;
       background-color: var(--accent);
-      color: #000;
+      color:#000;
       transition: background-color .3s;
     }
     button:hover { background-color: #00aaff; }
@@ -51,7 +51,7 @@
 
   <div class="buttons">
     <button onclick="changeBg()">🎨 تغيير الخلفية</button>
-    <button onclick="toggleAuto(this)">⏱️ إيقاف التحديث</button>
+    <button onclick="toggleAuto()">⏱️ {{auto}}</button>
   </div>
 
   <script>
@@ -69,19 +69,18 @@
     function changeBg() {
       const w = window.innerWidth;
       const h = window.innerHeight;
-      const url = `${UNSPLASH_BASE}/${w}x${h}?sig=${Math.floor(Math.random() * 10000)}`;
-      document.body.style.backgroundImage = `url('${url}')`;
+      document.body.style.backgroundImage = `url('${UNSPLASH_BASE}/${w}x${h}?nature')`;
     }
 
-    function toggleAuto(button) {
+    function toggleAuto() {
       autoRefresh = !autoRefresh;
-      button.textContent = autoRefresh ? "⏱️ إيقاف التحديث" : "⏱️ تفعيل التحديث";
+      this.event.target.textContent = autoRefresh ? "⏱️ تفعيل التحديث" : "⏱️ إيقاف التحديث";
     }
 
-    setInterval(updateTime, 1000);
+    setInterval(updateTime,1000);
     updateTime();
-    changeBg();
-    setInterval(() => { if (autoRefresh) changeBg(); }, 60000);
+    changeBg(); // أول تحميل
+    setInterval(() => { if (autoRefresh) changeBg(); }, 60000); // كل دقيقة
   </script>
 </body>
 </html>
