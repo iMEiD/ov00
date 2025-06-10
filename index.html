@@ -1,86 +1,68 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>ov00.com</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>معرض حساب إنستقرام | @imeid</title>
   <style>
-    :root {
-      --accent: #00c6ff;
-    }
     body {
       margin: 0;
-      padding: 0;
-      height: 100vh;
+      padding: 40px 20px;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      background: linear-gradient(to right, #fdfbfb, #ebedee);
+      color: #222;
       text-align: center;
-      background-size: cover;
-      background-position: center;
-      transition: background-image 0.5s ease;
     }
-    h1 { font-size: 3rem; margin-bottom: .5rem; }
-    #clock { font-size: 2.5rem; }
-    #date { font-size: 1.2rem; margin-bottom: 1.5rem; color: #eee; }
-    .buttons {
-      margin-top: 20px;
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2.2rem;
+      color: #333;
     }
-    button {
-      margin: 0 10px;
-      padding: 10px 20px;
+
+    p.description {
+      margin-bottom: 40px;
+      color: #666;
       font-size: 1rem;
-      border:none;
-      border-radius:5px;
-      cursor:pointer;
-      background-color: var(--accent);
-      color:#000;
-      transition: background-color .3s;
     }
-    button:hover { background-color: #00aaff; }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .post {
+      background: white;
+      padding: 12px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
+    }
+
+    .post:hover {
+      transform: translateY(-5px);
+    }
   </style>
 </head>
 <body>
+  <h1>📷 معرض صور @imeid</h1>
+  <p class="description">استعرض أجمل منشوراتي على إنستقرام من خلال هذا المعرض المباشر.</p>
 
-  <h1>مرحبًا بك في ov00.com</h1>
-  <div id="clock">--:--:--</div>
-  <div id="date">--/--/----</div>
-
-  <div class="buttons">
-    <button onclick="changeBg()">🎨 تغيير الخلفية</button>
-    <button onclick="toggleAuto()">⏱️ {{auto}}</button>
+  <div class="gallery">
+    <div class="post">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DIoCYzjs0bK/" data-instgrm-version="14" style="width:100%;"></blockquote>
+    </div>
+    <div class="post">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DImjh-zO9bo/" data-instgrm-version="14" style="width:100%;"></blockquote>
+    </div>
+    <div class="post">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DIkEv5Rs-77/" data-instgrm-version="14" style="width:100%;"></blockquote>
+    </div>
   </div>
 
-  <script>
-    const UNSPLASH_BASE = "https://source.unsplash.com/random";
-    let autoRefresh = true;
-
-    function updateTime() {
-      const now = new Date();
-      const optionsTime = { hour:'2-digit', minute:'2-digit', second:'2-digit' };
-      const optionsDate = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
-      document.getElementById("clock").textContent = now.toLocaleTimeString('ar-EG', optionsTime);
-      document.getElementById("date").textContent = now.toLocaleDateString('ar-EG', optionsDate);
-    }
-
-    function changeBg() {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      document.body.style.backgroundImage = `url('${UNSPLASH_BASE}/${w}x${h}?nature')`;
-    }
-
-    function toggleAuto() {
-      autoRefresh = !autoRefresh;
-      this.event.target.textContent = autoRefresh ? "⏱️ تفعيل التحديث" : "⏱️ إيقاف التحديث";
-    }
-
-    setInterval(updateTime,1000);
-    updateTime();
-    changeBg(); // أول تحميل
-    setInterval(() => { if (autoRefresh) changeBg(); }, 60000); // كل دقيقة
-  </script>
+  <script async src="//www.instagram.com/embed.js"></script>
 </body>
 </html>
