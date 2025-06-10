@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov00.com</title>
+  <style>
+    :root {
+      --bg-dark: #0f2027;
+      --text-dark: #ffffff;
+      --bg-light: linear-gradient(to right, #f0f0f0, #ffffff);
+      --text-light: #000000;
+      --accent: #00c6ff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      transition: background 0.3s, color 0.3s;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      margin-bottom: 1rem;
+    }
+
+    #clock {
+      font-size: 2.5rem;
+    }
+
+    #date {
+      font-size: 1.3rem;
+      margin-top: 10px;
+      color: #ccc;
+    }
+
+    .toggle-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 10px 15px;
+      background-color: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background-color 0.3s;
+    }
+
+    .toggle-btn:hover {
+      background-color: #00aaff;
+    }
+
+    .light-mode {
+      background: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    .light-mode #date {
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-btn" onclick="toggleMode()">تبديل الوضع</button>
+
+  <h1>مرحبًا بك في ov00.com</h1>
+  <div id="clock">--:--:--</div>
+  <div id="date">--/--/----</div>
+
+  <script>
+    function updateTime() {
+      const now = new Date();
+      const clock = document.getElementById("clock");
+      const date = document.getElementById("date");
+
+      const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+
+      clock.textContent = now.toLocaleTimeString('ar-EG', optionsTime);
+      date.textContent = now.toLocaleDateString('ar-EG', optionsDate);
+    }
+
+    function toggleMode() {
+      document.body.classList.toggle("light-mode");
+    }
+
+    setInterval(updateTime, 1000);
+    updateTime();
+  </script>
+</body>
+</html>
