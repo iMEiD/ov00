@@ -2,67 +2,822 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>@imeid</title>
+  <title>BudgetFlow - نظّم راتبك بهدوء</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      padding: 40px 20px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #fdfbfb, #ebedee);
-      color: #222;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #f5f7fb;
+      color: #111827;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Layout */
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(245, 247, 251, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .logo-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #0ea5e9, #22c55e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.08rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.4rem;
+      font-size: 0.94rem;
+      color: #4b5563;
+    }
+
+    .nav-links a:hover {
+      color: #111827;
+    }
+
+    .nav-cta {
+      display: flex;
+      gap: 0.65rem;
+      align-items: center;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 0.55rem 1.3rem;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      transition: 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0ea5e9, #22c55e);
+      color: #ffffff;
+      box-shadow: 0 8px 20px rgba(34, 197, 94, 0.35);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.03);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(34, 197, 94, 0.45);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid #d1d5db;
+      color: #374151;
+    }
+
+    .btn-ghost:hover {
+      background: #e5e7eb;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 2.8rem 0 2.5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 2.4rem;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.2rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.06);
+      color: #1d4ed8;
+      font-size: 0.75rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-title {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: #4b5563;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-small {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .hero-taglist {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.6rem;
+    }
+
+    .hero-tag {
+      font-size: 0.74rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      background: #e5f3ff;
+      color: #1d4ed8;
+    }
+
+    /* Hero mockup */
+    .hero-mock {
+      background: white;
+      border-radius: 22px;
+      padding: 1.2rem;
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.12);
+      border: 1px solid #e5e7eb;
+    }
+
+    .mock-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .mock-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .mock-pill {
+      font-size: 0.7rem;
+      padding: 0.1rem 0.55rem;
+      border-radius: 999px;
+      background: #f3f4ff;
+      color: #4f46e5;
+    }
+
+    .mock-balance {
+      margin-bottom: 1rem;
+    }
+
+    .mock-label {
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
+    .mock-amount {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .mock-progress {
+      margin-top: 0.6rem;
+      width: 100%;
+      height: 7px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      overflow: hidden;
+    }
+
+    .mock-progress-fill {
+      height: 100%;
+      width: 63%;
+      background: linear-gradient(90deg, #22c55e, #0ea5e9);
+    }
+
+    .mock-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin-top: 0.9rem;
+    }
+
+    .mock-card {
+      padding: 0.6rem 0.65rem;
+      border-radius: 12px;
+      background: #f9fafb;
+    }
+
+    .mock-card-title {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-bottom: 0.35rem;
+    }
+
+    .mock-card-value {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .mock-tag-green {
+      font-size: 0.7rem;
+      color: #16a34a;
+    }
+
+    .mock-tag-orange {
+      font-size: 0.7rem;
+      color: #ea580c;
+    }
+
+    /* Sections */
+    section {
+      padding: 2.3rem 0;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      text-align: center;
+      color: #0f172a;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 1.6rem;
+    }
+
+    /* Features grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 18px;
+      padding: 1.1rem;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.05);
+    }
+
+    .feature-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      background: #eff6ff;
+    }
+
+    .feature-title {
+      font-weight: 600;
+      font-size: 0.98rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .feature-text {
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    /* How it works */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 0.6rem;
+    }
+
+    .step {
+      background: white;
+      border-radius: 16px;
+      padding: 0.9rem;
+      border: 1px dashed #d1d5db;
+    }
+
+    .step-num {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-bottom: 0.2rem;
+    }
+
+    .step-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+
+    .step-text {
+      font-size: 0.84rem;
+      color: #6b7280;
+    }
+
+    /* Audience */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 0.9rem;
+    }
+
+    .aud-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1rem;
+      border: 1px solid #e5e7eb;
+    }
+
+    .aud-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .aud-text {
+      font-size: 0.84rem;
+      color: #6b7280;
+    }
+
+    /* CTA block */
+    .cta-block {
+      background: linear-gradient(135deg, #0ea5e9, #22c55e);
+      color: white;
+      border-radius: 22px;
+      padding: 1.6rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
+      box-shadow: 0 18px 35px rgba(34, 197, 94, 0.45);
+    }
+
+    .cta-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .cta-text {
+      font-size: 0.9rem;
+      opacity: 0.92;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.4rem;
+    }
+
+    .btn-cta-light {
+      background: white;
+      color: #111827;
+      border-radius: 999px;
+      padding: 0.55rem 1.3rem;
+      font-size: 0.88rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-cta-ghost {
+      background: transparent;
+      border-radius: 999px;
+      padding: 0.5rem 1.1rem;
+      font-size: 0.86rem;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      color: white;
+    }
+
+    /* FAQ */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 0.7rem;
+    }
+
+    .faq-item {
+      background: white;
+      border-radius: 16px;
+      padding: 0.95rem;
+      border: 1px solid #e5e7eb;
+    }
+
+    .faq-q {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-a {
+      font-size: 0.84rem;
+      color: #6b7280;
+    }
+
+    footer {
+      padding: 1.4rem 0 1.9rem;
+      font-size: 0.8rem;
+      color: #9ca3af;
       text-align: center;
     }
 
-    h1 {
-      margin-bottom: 20px;
-      font-size: 2.2rem;
-      color: #333;
+    footer a {
+      color: #6b7280;
     }
 
-    p.description {
-      margin-bottom: 40px;
-      color: #666;
-      font-size: 1rem;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .post {
-      background: white;
-      padding: 12px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      transition: transform 0.3s ease;
-    }
-
-    .post:hover {
-      transform: translateY(-5px);
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      .features-grid,
+      .steps,
+      .audience-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        padding-top: 1.9rem;
+      }
+      .nav-links {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>📷 @imeid</h1>
-  <p class="description">معرض مباشر لاحدث منشوراتي</p>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <div class="logo">
+          <div class="logo-icon">B</div>
+          <div class="logo-text">BudgetFlow</div>
+        </div>
+        <div class="nav-links">
+          <a href="#features">المميزات</a>
+          <a href="#how">كيف يعمل؟</a>
+          <a href="#planner">المخطط الشهري</a>
+          <a href="#faq">الأسئلة الشائعة</a>
+        </div>
+        <div class="nav-cta">
+          <button class="btn btn-ghost">Demo مبدئي</button>
+          <button class="btn btn-primary">انضم لقائمة الانتظار</button>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-  <div class="gallery">
-    <div class="post">
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DIoCYzjs0bK/" data-instgrm-version="14" style="width:100%;"></blockquote>
-    </div>
-    <div class="post">
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DImjh-zO9bo/" data-instgrm-version="14" style="width:100%;"></blockquote>
-    </div>
-    <div class="post">
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DIkEv5Rs-77/" data-instgrm-version="14" style="width:100%;"></blockquote>
-    </div>
-  </div>
+  <!-- Hero -->
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="hero-badge">
+            🎯 نسخة تجريبية
+            <span>مصممة للمستخدم السعودي</span>
+          </div>
+          <h1 class="hero-title">
+            نظّم راتبك، حضّر لالتزاماتك، ووصل لأهدافك بدون قلق.
+          </h1>
+          <p class="hero-subtitle">
+            <strong>BudgetFlow</strong> تطبيق يساعدك توزع راتبك بذكاء، تتابع التزاماتك الشهرية والسنوية،
+            وتحسب لك كم تحتاج تدخر شهرياً عشان تحقق أهدافك وتدفع تأمين سيارتك وأنت مرتاح.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary">أبي أجرب الفكرة 🔍</button>
+            <button class="btn btn-ghost">عرض تفاصيل المميزات</button>
+          </div>
+          <p class="hero-small">
+            لا ربط بنكي في النسخة الأولى – كل شيء يدوي وبسيط لتجربة الفكرة وأخذ آراء الناس.
+          </p>
+          <div class="hero-taglist">
+            <span class="hero-tag">إدارة راتب</span>
+            <span class="hero-tag">أهداف مالية</span>
+            <span class="hero-tag">التزامات شهرية</span>
+            <span class="hero-tag">تأمين سيارة</span>
+          </div>
+        </div>
 
-  <script async src="//www.instagram.com/embed.js"></script>
+        <div class="hero-mock">
+          <div class="mock-header">
+            <div class="mock-title">نظرة سريعة على الشهر</div>
+            <div class="mock-pill">نوفمبر · راتب ٨٬٥٠٠ ر.س</div>
+          </div>
+          <div class="mock-balance">
+            <div class="mock-label">المتبقي هذا الشهر</div>
+            <div class="mock-amount">٥٬٣٠٠ ر.س</div>
+            <div class="mock-progress">
+              <div class="mock-progress-fill"></div>
+            </div>
+          </div>
+          <div class="mock-grid">
+            <div class="mock-card">
+              <div class="mock-card-title">فواتير هذا الشهر</div>
+              <div class="mock-card-value">٢٬٢٢٨ ر.س</div>
+              <div class="mock-tag-orange">قرض · إيجار · تابي</div>
+            </div>
+            <div class="mock-card">
+              <div class="mock-card-title">ادخار للأهداف</div>
+              <div class="mock-card-value">١٬٧٥٠ ر.س</div>
+              <div class="mock-tag-green">سيارة · سفرة · طوارئ</div>
+            </div>
+            <div class="mock-card">
+              <div class="mock-card-title">ادخار للمصاريف السنوية</div>
+              <div class="mock-card-value">٢٢٥ ر.س</div>
+              <div class="mock-tag-green">تأمين · صيانة · دومين</div>
+            </div>
+            <div class="mock-card">
+              <div class="mock-card-title">الصرف المتوقّع</div>
+              <div class="mock-card-value">٣٬١٠٠ ر.س</div>
+              <div class="mock-tag-orange">أقل من الشهر الماضي بـ ١٢٪</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features">
+      <div class="container">
+        <h2 class="section-title">وش يقدّم لك BudgetFlow؟</h2>
+        <p class="section-subtitle">
+          مو بس برنامج ميزانية عادي – نظام بسيط يساعدك تمسك زمام راتبك وتستعد لكل التزاماتك بهدوء.
+        </p>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <div class="feature-title">لوحة تحكم واضحة</div>
+            <p class="feature-text">
+              نظرة واحدة تكفي: الراتب، المصاريف، الفواتير، الأهداف، والادخار للمصاريف السنوية – كلها في شاشة واحدة
+              بدون تعقيد.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <div class="feature-title">نظام أهداف ذكي</div>
+            <p class="feature-text">
+              حدّد هدفك (سيارة، جوال، سفرة، طوارئ)، حط المبلغ والخطة الشهرية، والتطبيق يحسب لك نسبة التقدّم
+              والتاريخ المتوقع توصله فيه.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">📅</div>
+            <div class="feature-title">التزامات شهرية وسنوية</div>
+            <p class="feature-text">
+              إيجار، قرض، تابي، تأمين سيارة، صيانة، اشتراكات… التطبيق يجمعها لك ويحسب لك كم تحتاج تحوش شهريًا
+              عشان ما تتفاجأ.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🧮</div>
+            <div class="feature-title">مخطط شهري للمستقبل</div>
+            <p class="feature-text">
+              صفحة Planner تعطيك توقع للشهر الجاي: كم بتدفع، كم تحوش، وكم يفضّل يكون صرفك اليومي عشان تمشي بأمان.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🧾</div>
+            <div class="feature-title">سجل عمليات منظم</div>
+            <p class="feature-text">
+              تابع وين راح راتبك فعليًا: أكل، بنزين، قهوة، ترفيه… مع تقسيم بالأيام والفئات، عشان تشوف الصورة كاملة.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🇸🇦</div>
+            <div class="feature-title">مصمم للواقع السعودي</div>
+            <p class="feature-text">
+              العملة بالريال، الالتزامات مثل تابي وتمارا وتأمين السيارة، وطريقة تفكير تناسب الموظف اللي راتبه
+              شهري والتزاماته كثيرة.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how">
+      <div class="container">
+        <h2 class="section-title">كيف راح تستخدم التطبيق؟</h2>
+        <p class="section-subtitle">
+          الفكرة إن كل شيء يكون واضح وبسيط، بدون ما تحتاج تكون خبير مالي.
+        </p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">الخطوة ١</div>
+            <div class="step-title">تحدّد راتبك والتزاماتك</div>
+            <p class="step-text">
+              تحط راتبك الشهري، الفواتير الثابتة (إيجار، قرض، جوال…) وكل المصاريف السنوية المعروفة مثل تأمين
+              السيارة والصيانة.
+            </p>
+          </div>
+          <div class="step">
+            <div class="step-num">الخطوة ٢</div>
+            <div class="step-title">تضيف أهدافك</div>
+            <p class="step-text">
+              تضيف أهدافك مثل سيارة، جوال، سفرة، أو صندوق طوارئ. تحط المبلغ المستهدف، وكم تقدر تحوش شهرياً، والتطبيق
+              يكمل الباقي.
+            </p>
+          </div>
+          <div class="step">
+            <div class="step-num">الخطوة ٣</div>
+            <div class="step-title">تتابع الشهر مع المخطط الذكي</div>
+            <p class="step-text">
+              كل شهر تشوف الخطة: كم بتدفع فواتير، كم تحوش للمصاريف السنوية، كم تقدر تحط للأهداف، وكم يصير صرفك
+              اليومي المريح.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Planner focus -->
+    <section id="planner">
+      <div class="container">
+        <h2 class="section-title">المخطط الشهري – قلب BudgetFlow</h2>
+        <p class="section-subtitle">
+          مو بس تتابع وين راح راتبك… تعرف من الآن وش الأفضل تسويه بالشهر الجاي.
+        </p>
+
+        <div class="cta-block">
+          <div class="cta-title">بدل ما تنصدم آخر السنة… خلك مستعد من بدري.</div>
+          <p class="cta-text">
+            BudgetFlow يجمع بيانات راتبك، مصاريفك، والأهداف، ويعطيك صورة واضحة للمستقبل:
+            <br />
+            – كم تحتاج تحوش هذا الشهر لتأمين سيارتك.
+            <br />
+            – كم يناسب تحط للأهداف.
+            <br />
+            – كم يفضّل تصرف يومياً عشان ما تعلق آخر الشهر.
+          </p>
+          <div class="cta-actions">
+            <button class="btn-cta-light">أبغى أشارك رأيي في الفكرة</button>
+            <button class="btn-cta-ghost">أضفني لقائمة التجربة المبكرة</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Audience -->
+    <section>
+      <div class="container">
+        <h2 class="section-title">لمين مناسب BudgetFlow؟</h2>
+        <p class="section-subtitle">
+          أي شخص عنده راتب ثابت والتزامات كثيرة ويبي يعيش مرتاح بدون دوامة "وين راح الراتب؟".
+        </p>
+
+        <div class="audience-grid">
+          <div class="aud-card">
+            <div class="aud-title">موظف راتبه شهري</div>
+            <p class="aud-text">
+              عندك إيجار، قرض، تابي، سيارة… وتبي تحوش لأشياء ثانية بنفس الوقت بدون لخبطه.
+            </p>
+          </div>
+          <div class="aud-card">
+            <div class="aud-title">شخص متزوج وعنده التزامات</div>
+            <p class="aud-text">
+              مصاريف بيت، زوجة، طفل (أو جاي بالطريق 😄)، تأمين، صيانة… وتبي تمسك الأمور قبل ما تتراكم.
+            </p>
+          </div>
+          <div class="aud-card">
+            <div class="aud-title">شخص يحب يخطط لأهدافه</div>
+            <p class="aud-text">
+              تحب تسافر، تغيّر جوالك، تطوّر نفسك… وتبي تشوف بوضوح: متى راح تحقق الهدف وكيف.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container">
+        <h2 class="section-title">أسئلة شائعة</h2>
+        <p class="section-subtitle">
+          بعض الأسئلة اللي ممكن تجي في بال أي شخص يسمع عن BudgetFlow لأول مرة.
+        </p>
+
+        <div class="faq-grid">
+          <div class="faq-item">
+            <div class="faq-q">هل التطبيق مرتبط بالبنك؟</div>
+            <div class="faq-a">
+              النسخة التجريبية الأولى ما فيها ربط بنكي. الهدف الآن تجربة الفكرة، ترتيب الواجهات، وأخذ feedback من
+              الناس بشكل بسيط وآمن.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">هل لازم أضيف كل مصاريفي يدويًا؟</div>
+            <div class="faq-a">
+              في البداية نعم، عشان نفهم نمط الاستخدام. لاحقاً ممكن يضاف استيراد تلقائي للعمليات عن طريق ربط بنكي أو
+              قراءة الإشعارات البنكية (حسب الأنظمة والتنظيمات).
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">وش أهم ميزة تميّز BudgetFlow عن غيره؟</div>
+            <div class="faq-a">
+              التركيز على الالتزامات السنوية (مثل تأمين السيارة) وحساب المبلغ الشهري اللي تحتاج تحطه على جنب، مع
+              دمجها مع الأهداف الشخصية والمصاريف الشهرية في مخطط واحد.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">هل التطبيق جاهز للنشر؟</div>
+            <div class="faq-a">
+              حالياً في مرحلة تصميم وتجهيز نموذج أولي (Prototype) وتجارب مبدئية مع مستخدمين مقربين لأخذ آرائهم قبل
+              بناء النسخة النهائية.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section>
+      <div class="container">
+        <div class="cta-block">
+          <div class="cta-title">حاب تشارك في تطوير BudgetFlow؟</div>
+          <p class="cta-text">
+            الهدف من المرحلة الحالية إننا نسمع من الناس اللي فعلاً يعانون من موضوع "وين راح الراتب؟" ونبني شيء يساعدهم
+            فعلاً.
+            <br />
+            تقدر تعطينا رأيك على التصميم، الفكرة، الواجهات، أو تشارك تجربتك مع الرواتب والالتزامات.
+          </p>
+          <div class="cta-actions">
+            <button class="btn-cta-light">أبغى أكون من أوّل من يجرب</button>
+            <button class="btn-cta-ghost">تواصل معي للاطلاع على النموذج</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      BudgetFlow · نموذج أولي لفكرة تطبيق تنظيم الميزانية والالتزامات
+      <br />
+      مبني كمفهوم مبدئي للاختبار وجمع الآراء.
+    </div>
+  </footer>
 </body>
 </html>
